@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/philip/Desktop/comp362/project02/cmake-build-debug",
+  "command": "/usr/bin/cc    -D_FILE_OFFSET_BITS=64 -g -Wall --pedantic -g -O0 -D_DEBUG   -std=gnu11 -o CMakeFiles/disk.dir/disk.c.o   -c /home/philip/Desktop/comp362/project02/disk.c",
+  "file": "/home/philip/Desktop/comp362/project02/disk.c"
+}
+]
