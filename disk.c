@@ -41,7 +41,8 @@ void printTransl(int logaddr)
 
         if (phys2log(&phaddr) != logaddr)
             printf("ERROR: no match!\n");
-    } else
+    }
+    else
         printf("ERROR: invalid logical address!\n");
 }
 
@@ -66,8 +67,9 @@ int readDisk(int logicalBlockNum, int numOfBlocks, void **buffer)
 
             return SIM_DEV_INVALID_ADDRESS;
         }
-        *((char*)buffer + (numOfBlocks * SECT_SIZE)) = '\0';
+
     }
+    *((char*)buffer + (numOfBlocks * SECT_SIZE)) = '\0';
 
 
     return SIM_DEV_SUCCESS;
@@ -106,16 +108,16 @@ int main(int argc, char *argv[])
     
     physaddr_t phaddr;
 
-    char readbuf[8 * SECT_SIZE];
+    char* readbuf;
     char* writebuf = "testing123 test string";
     int logaddr;
 
     logaddr = rand() % MAX_LOGICAL_SECTOR;
     printTransl(logaddr);
-    writeDisk(logaddr,2, writebuf);
-    readDisk(logaddr,2, &readbuf);
-    printf("Read result is %s, original string was %s\n", readbuf, writebuf);
-    free(*readbuf);
+    writeDisk(logaddr,3, writebuf);
+    readDisk(logaddr,3, &readbuf);
+    printf("Read result is %s, original string was %s\n", &readbuf, writebuf);
+    free(&readbuf);
     /*
     if (argc < 2)
         while (1)
