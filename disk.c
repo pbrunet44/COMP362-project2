@@ -48,13 +48,17 @@ void printTransl(int logaddr)
 int readDisk(int logicalBlockNum, int numOfBlocks, void **buffer)
 {
     // TODO: implement
+    if(logicalBlockNum + numOfBlocks > MAX_LOGICAL_SECTOR)
+    {
+        return SIM_DEV_TOO_LARGE_BLOCK_RANGE;
+    }
     physaddr_t physAddr;
-    *buffer = malloc(sizeof((char*)buffer));
+    *buffer = calloc(numOfBlocks*SECT_SIZE + 1, 1);
     for (int i = 0; i < numOfBlocks; ++i)
     {
         if(log2phys(logicalBlockNum + i, &physAddr) == SIM_DEV_SUCCESS)
         {
-            strcat(*buffer, disk[physAddr.cyl][physAddr.head][physAddr.sect]);
+            memcpy(((char*)buffer + i*SECT_SIZE), disk[physAddr.cyl][physAddr.head][physAddr.sect], SECT_SIZE);
         }
         else
         {
@@ -62,7 +66,9 @@ int readDisk(int logicalBlockNum, int numOfBlocks, void **buffer)
 
             return SIM_DEV_INVALID_ADDRESS;
         }
+        *((char*)buffer + (numOfBlocks * SECT_SIZE)) = '\0';
     }
+
 
     return SIM_DEV_SUCCESS;
 }
@@ -70,13 +76,17 @@ int readDisk(int logicalBlockNum, int numOfBlocks, void **buffer)
 int writeDisk(int logicalBlockNum, int numOfSectors, void *buffer)
 {
     // TODO: implement
+    if(logicalBlockNum + numOfSectors > MAX_LOGICAL_SECTOR)
+    {
+        return SIM_DEV_TOO_LARGE_BLOCK_RANGE;
+    }
     physaddr_t physAddr;
 
     for (int i = 0; i < numOfSectors; ++i)
     {
         if(log2phys(logicalBlockNum + i, &physAddr) == SIM_DEV_SUCCESS)
         {
-            strncpy(disk[physAddr.cyl][physAddr.head][physAddr.sect], ((char*)buffer + i*SECT_SIZE), SECT_SIZE);
+            memcpy(disk[physAddr.cyl][physAddr.head][physAddr.sect], ((char*)buffer + i*SECT_SIZE), SECT_SIZE);
         }
         else
         {
@@ -89,20 +99,23 @@ int writeDisk(int logicalBlockNum, int numOfSectors, void *buffer)
     return 0;
 }
 
+//#ifdef __DEBUG
 int main(int argc, char *argv[])
 {
     // TODO: extend to also test for reading and writing
     
     physaddr_t phaddr;
 
-    char buf[8 * SECT_SIZE];
-
+    char readbuf[8 * SECT_SIZE];
+    char* writebuf = "testing123 test string";
     int logaddr;
 
     logaddr = rand() % MAX_LOGICAL_SECTOR;
     printTransl(logaddr);
-    writeDisk(logaddr,1, buf);
-    readDisk(logaddr,1, &buf);
+    writeDisk(logaddr,2, writebuf);
+    readDisk(logaddr,2, &readbuf);
+    printf("Read result is %s, original string was %s\n", readbuf, writebuf);
+    free(*readbuf);
     /*
     if (argc < 2)
         while (1)
@@ -141,3 +154,4 @@ int main(int argc, char *argv[])
             break;
     }*/
 }
+//#endif

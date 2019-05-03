@@ -15,7 +15,7 @@
 #define NUM_OF_CYLS 200
 #define NUM_OF_HEADS 10
 #define NUM_OF_SECTS 128
-#define SECT_SIZE 1280
+#define SECT_SIZE 16
 
 #define MAX_LOGICAL_SECTOR 256000 // NUM_OF_CYLS * NUM_OF_HEADS * NUM_OF_SECTS
 
@@ -56,7 +56,8 @@ int writeDisk(int logicalBlockNum, int numOfSectors, void *buffer);
  */
  typedef enum {
      SIM_DEV_SUCCESS = 0,
-     SIM_DEV_INVALID_ADDRESS
+     SIM_DEV_INVALID_ADDRESS,
+     SIM_DEV_TOO_LARGE_BLOCK_RANGE
  }SIM_DEV_RETURN_CODES;
 
 #endif
