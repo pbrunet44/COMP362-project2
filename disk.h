@@ -50,6 +50,12 @@ int readDisk(int logicalBlockNum, int numOfBlocks, void **buffer);
 This function copies num_of_sectors sectors from the buffer to the disk starting at sector pointed to by logical_block_num. Here, you also should validate the parameters.
 **/
 int writeDisk(int logicalBlockNum, int numOfSectors, void *buffer);
+/**
+ * Generates random readable/printable content for testing
+ * @param size Number of chars to generate
+ * @return The content
+ */
+char *generateContent(int size);
 
 /**\
  * ENUM for different types of errors
