@@ -40,7 +40,8 @@ void printTransl(int logaddr)
         printf("Physical address: (%d, %d, %d)\n", phaddr.cyl, phaddr.head, phaddr.sect);
 
         if (phys2log(&phaddr) != logaddr)
-            printf("ERROR: no match!\n");
+
+            printf("ERROR: no match! %d != %d\n", phys2log(&phaddr), logaddr);
     }
     else
         printf("ERROR: invalid logical address!\n");
@@ -54,7 +55,7 @@ int readDisk(int logicalBlockNum, int numOfBlocks, void **buffer)
         return SIM_DEV_TOO_LARGE_BLOCK_RANGE;
     }
     physaddr_t physAddr;
-    *buffer = calloc(numOfBlocks*SECT_SIZE + 1, 1);
+    //*buffer = calloc(numOfBlocks*SECT_SIZE + 1, 1);
     for (int i = 0; i < numOfBlocks; ++i)
     {
         if(log2phys(logicalBlockNum + i, &physAddr) == SIM_DEV_SUCCESS)
@@ -100,6 +101,24 @@ int writeDisk(int logicalBlockNum, int numOfSectors, void *buffer)
 
     return 0;
 }
+/***
+ * Generates random readable/printable content for testing
+ */
+
+char *generateContent(int size)
+{
+    char *content = malloc(size);
+
+    int firstPrintable = ' ';
+    int len = '~' - firstPrintable;
+
+    for (int i = 0; i < size - 1; i++)
+        *(content + i) = firstPrintable + rand() % len;
+
+    content[size - 1] = '\0';
+    return content;
+}
+
 
 //#ifdef __DEBUG
 int main(int argc, char *argv[])
@@ -108,16 +127,24 @@ int main(int argc, char *argv[])
     
     physaddr_t phaddr;
 
-    char* readbuf;
-    char* writebuf = "testing123 test string";
+    char** readbuf = calloc(3*SECT_SIZE + 1, 1);
+    char* writebuf = generateContent(3840);
     int logaddr;
 
     logaddr = rand() % MAX_LOGICAL_SECTOR;
     printTransl(logaddr);
     writeDisk(logaddr,3, writebuf);
-    readDisk(logaddr,3, &readbuf);
-    printf("Read result is %s, original string was %s\n", &readbuf, writebuf);
-    free(&readbuf);
+    readDisk(logaddr,3, readbuf);
+    printf("Read result is %s\noriginal string was %s\n", readbuf, writebuf);
+    free(readbuf);
+    readbuf = calloc(4*SECT_SIZE + 1, 1);
+    logaddr = rand() % MAX_LOGICAL_SECTOR;
+    printTransl(logaddr);
+    writebuf = generateContent(5120);
+    writeDisk(logaddr,4, writebuf);
+    readDisk(logaddr,4, readbuf);
+    printf("Read result is %s\noriginal string was %s\n", readbuf, writebuf);
+    free(readbuf);
     /*
     if (argc < 2)
         while (1)
