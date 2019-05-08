@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named disk
+# Target rules for targets named timer
 
 # Build rule for target.
-disk: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 disk
-.PHONY : disk
+timer: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 timer
+.PHONY : timer
 
 # fast build rule for target.
-disk/fast:
-	$(MAKE) -f CMakeFiles/disk.dir/build.make CMakeFiles/disk.dir/build
-.PHONY : disk/fast
+timer/fast:
+	$(MAKE) -f CMakeFiles/timer.dir/build.make CMakeFiles/timer.dir/build
+.PHONY : timer/fast
 
-disk.o: disk.c.o
+timer.o: timer.c.o
 
-.PHONY : disk.o
+.PHONY : timer.o
 
 # target to build an object file
-disk.c.o:
-	$(MAKE) -f CMakeFiles/disk.dir/build.make CMakeFiles/disk.dir/disk.c.o
-.PHONY : disk.c.o
+timer.c.o:
+	$(MAKE) -f CMakeFiles/timer.dir/build.make CMakeFiles/timer.dir/timer.c.o
+.PHONY : timer.c.o
 
-disk.i: disk.c.i
+timer.i: timer.c.i
 
-.PHONY : disk.i
+.PHONY : timer.i
 
 # target to preprocess a source file
-disk.c.i:
-	$(MAKE) -f CMakeFiles/disk.dir/build.make CMakeFiles/disk.dir/disk.c.i
-.PHONY : disk.c.i
+timer.c.i:
+	$(MAKE) -f CMakeFiles/timer.dir/build.make CMakeFiles/timer.dir/timer.c.i
+.PHONY : timer.c.i
 
-disk.s: disk.c.s
+timer.s: timer.c.s
 
-.PHONY : disk.s
+.PHONY : timer.s
 
 # target to generate assembly for a file
-disk.c.s:
-	$(MAKE) -f CMakeFiles/disk.dir/build.make CMakeFiles/disk.dir/disk.c.s
-.PHONY : disk.c.s
+timer.c.s:
+	$(MAKE) -f CMakeFiles/timer.dir/build.make CMakeFiles/timer.dir/timer.c.s
+.PHONY : timer.c.s
 
 # Help Target
 help:
@@ -157,11 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... disk"
+	@echo "... timer"
 	@echo "... edit_cache"
-	@echo "... disk.o"
-	@echo "... disk.i"
-	@echo "... disk.s"
+	@echo "... timer.o"
+	@echo "... timer.i"
+	@echo "... timer.s"
 .PHONY : help
 
 

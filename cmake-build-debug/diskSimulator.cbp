@@ -27,8 +27,8 @@
 					<DistClean command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="disk">
-				<Option output="/home/philip/Desktop/comp362/project02/cmake-build-debug/bin/disk" prefix_auto="0" extension_auto="0"/>
+			<Target title="timer">
+				<Option output="/home/philip/Desktop/comp362/project02/cmake-build-debug/bin/timer" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/philip/Desktop/comp362/project02/cmake-build-debug/bin"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -41,14 +41,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 disk"/>
+					<Build command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 timer"/>
 					<CompileFile command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="disk/fast">
-				<Option output="/home/philip/Desktop/comp362/project02/cmake-build-debug/bin/disk" prefix_auto="0" extension_auto="0"/>
+			<Target title="timer/fast">
+				<Option output="/home/philip/Desktop/comp362/project02/cmake-build-debug/bin/timer" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/philip/Desktop/comp362/project02/cmake-build-debug/bin"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -61,7 +61,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 disk/fast"/>
+					<Build command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 timer/fast"/>
 					<CompileFile command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -f &quot;/home/philip/Desktop/comp362/project02/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -78,11 +78,8 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/philip/Desktop/comp362/project02/disk.c">
-			<Option target="disk"/>
-		</Unit>
-		<Unit filename="/home/philip/Desktop/comp362/project02/disk.h">
-			<Option target="disk"/>
+		<Unit filename="/home/philip/Desktop/comp362/project02/timer.c">
+			<Option target="timer"/>
 		</Unit>
 		<Unit filename="/home/philip/Desktop/comp362/project02/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

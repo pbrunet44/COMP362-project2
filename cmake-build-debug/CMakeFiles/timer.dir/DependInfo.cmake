@@ -4,8 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/philip/Desktop/comp362/project02/disk.c" "/home/philip/Desktop/comp362/project02/cmake-build-debug/CMakeFiles/disk.dir/disk.c.o"
-  "/home/philip/Desktop/comp362/project02/timer.c" "/home/philip/Desktop/comp362/project02/cmake-build-debug/CMakeFiles/disk.dir/timer.c.o"
+  "/home/philip/Desktop/comp362/project02/timer.c" "/home/philip/Desktop/comp362/project02/cmake-build-debug/CMakeFiles/timer.dir/timer.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

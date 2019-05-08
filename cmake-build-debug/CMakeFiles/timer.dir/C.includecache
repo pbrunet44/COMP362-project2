@@ -19,10 +19,12 @@ stdlib.h
 -
 string.h
 -
+stdbool.h
+-
 
 /home/philip/Desktop/comp362/project02/timer.c
-disk.h
-/home/philip/Desktop/comp362/project02/disk.h
+disk.c
+/home/philip/Desktop/comp362/project02/disk.c
 sys/signal.h
 -
 time.h

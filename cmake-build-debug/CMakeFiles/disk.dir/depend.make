@@ -4,3 +4,6 @@
 CMakeFiles/disk.dir/disk.c.o: ../disk.c
 CMakeFiles/disk.dir/disk.c.o: ../disk.h
 
+CMakeFiles/disk.dir/timer.c.o: ../disk.h
+CMakeFiles/disk.dir/timer.c.o: ../timer.c
+
