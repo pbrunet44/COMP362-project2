@@ -1,15 +1,21 @@
+/**
+* Name: Philip Brunet
+* Lab/task: Project 2
+* Date: 05/07/19
+**/
+#include "disk.c"
 #include <sys/signal.h>
 #include <time.h>
 #include <sys/time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 
-#define COUNTDOWN_VALUE 10
 
-#define TIMEOUT_INTERVAL 2
-#define TIMEOUT_DELAY 5
+#define COUNTDOWN_VALUE 1000
+
+#define TIMEOUT_DELAY_S 1
+#define TIMEOUT_DELAY_NS 0
+
+#define TIMEOUT_INTERVAL_S 0
+#define TIMEOUT_INTERVAL_NS 1000000
 
 timer_t gTimerid;
 int count = COUNTDOWN_VALUE;
@@ -18,11 +24,11 @@ void start_timer(void)
 {
     struct itimerspec value;
 
-    value.it_value.tv_sec = TIMEOUT_DELAY;
-    value.it_value.tv_nsec = 0;
+    value.it_value.tv_sec = TIMEOUT_DELAY_S;
+    value.it_value.tv_nsec = TIMEOUT_DELAY_NS;
 
-    value.it_interval.tv_sec = TIMEOUT_INTERVAL;
-    value.it_interval.tv_nsec = 0;
+    value.it_interval.tv_sec = TIMEOUT_INTERVAL_S;
+    value.it_interval.tv_nsec = TIMEOUT_INTERVAL_NS;
 
     timer_create (CLOCK_REALTIME, NULL, &gTimerid);
 
@@ -49,12 +55,35 @@ void timer_callback(int sig)
     struct timeval ts;
     time_t tm;
 
+    checkDisk();
+
     time(&tm); // man 3 time
     printf("Time: %s", ctime(&tm)); // man ctime
 
     gettimeofday(&ts, NULL); // man gettimeofday
     printf("Time: %ld.%06ld secs.\n\n", (long)ts.tv_sec, (long)ts.tv_usec);
     count--;
+}
+
+void checkDisk()
+{
+    int logaddr = rand() % MAX_LOGICAL_SECTOR;
+    printTransl(logaddr);
+    int numBlocks = (rand() % 5) + 1;
+    if(rand() % 2 == 0) //Read
+    {
+        char** readbuf = calloc(numBlocks*SECT_SIZE + 1, 1);
+        readDisk(logaddr,numBlocks, readbuf);
+        printf("Reading %d blocks\nRead buffer content: %s\n", numBlocks, readbuf);
+        free(readbuf);
+    }
+    else //Write
+    {
+        char* writebuf = generateContent((1280 * numBlocks));
+        writeDisk(logaddr,numBlocks, writebuf);
+        printf("Writing %d blocks\nWriting content: %s\n", numBlocks, writebuf);
+    }
+
 }
 
 int main(int ac, char **av)

@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define NUM_OF_CYLS 200
 #define NUM_OF_HEADS 10
@@ -52,10 +53,24 @@ This function copies num_of_sectors sectors from the buffer to the disk starting
 int writeDisk(int logicalBlockNum, int numOfSectors, void *buffer);
 /**
  * Generates random readable/printable content for testing
- * @param size Number of chars to generate
+ * @param size: Number of chars to generate
  * @return The content
  */
 char *generateContent(int size);
+
+/**
+ * Tests disk.c inside timer.c
+ */
+void checkDisk();
+
+/**
+ * Functions for timer.c
+ */
+void timer_callback(int sig);
+
+void stop_timer(void);
+
+void start_timer(void);
 
 /**\
  * ENUM for different types of errors

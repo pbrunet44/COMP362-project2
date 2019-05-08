@@ -120,7 +120,7 @@ char *generateContent(int size)
 }
 
 
-//#ifdef __DEBUG
+#ifdef __DEBUG
 int main(int argc, char *argv[])
 {
     // TODO: extend to also test for reading and writing
@@ -183,4 +183,4 @@ int main(int argc, char *argv[])
             break;
     }*/
 }
-//#endif
+#endif
