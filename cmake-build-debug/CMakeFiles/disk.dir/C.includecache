@@ -19,14 +19,6 @@ stdlib.h
 -
 string.h
 -
-
-/home/philip/Desktop/comp362/project02/timer.c
-disk.h
-/home/philip/Desktop/comp362/project02/disk.h
-sys/signal.h
--
-time.h
--
-sys/time.h
+stdbool.h
 -
 

@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
     physaddr_t phaddr;
 
     char** readbuf = calloc(3*SECT_SIZE + 1, 1);
-    char* writebuf = generateContent(3840);
+    char* writebuf = generateContent((3*SECT_SIZE));
     int logaddr;
 
     logaddr = rand() % MAX_LOGICAL_SECTOR;
@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
     readbuf = calloc(4*SECT_SIZE + 1, 1);
     logaddr = rand() % MAX_LOGICAL_SECTOR;
     printTransl(logaddr);
-    writebuf = generateContent(5120);
+    writebuf = generateContent((5*SECT_SIZE));
     writeDisk(logaddr,4, writebuf);
     readDisk(logaddr,4, readbuf);
     printf("Read result is %s\noriginal string was %s\n", readbuf, writebuf);

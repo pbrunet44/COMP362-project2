@@ -72,14 +72,14 @@ void checkDisk()
     int numBlocks = (rand() % 5) + 1;
     if(rand() % 2 == 0) //Read
     {
-        char** readbuf = calloc(numBlocks*SECT_SIZE + 1, 1);
+        char** readbuf = malloc(numBlocks*SECT_SIZE + 1);
         readDisk(logaddr,numBlocks, readbuf);
         printf("Reading %d blocks\nRead buffer content: %s\n", numBlocks, readbuf);
         free(readbuf);
     }
     else //Write
     {
-        char* writebuf = generateContent((1280 * numBlocks));
+        char* writebuf = generateContent((SECT_SIZE * numBlocks));
         writeDisk(logaddr,numBlocks, writebuf);
         printf("Writing %d blocks\nWriting content: %s\n", numBlocks, writebuf);
     }

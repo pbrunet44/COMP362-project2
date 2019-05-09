@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/disk.dir/disk.c.o"
-  "CMakeFiles/disk.dir/timer.c.o"
   "bin/disk.pdb"
   "bin/disk"
 )
