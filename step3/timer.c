@@ -51,17 +51,17 @@ void stop_timer(void)
 
 void timer_callback(int sig)
 {
-    printf("Caught timer signal: %d ... !!\n", sig);
+    printk("Caught timer signal: %d ... !!\n", sig);
     struct timeval ts;
     time_t tm;
 
     checkDisk();
 
     time(&tm); // man 3 time
-    printf("Time: %s", ctime(&tm)); // man ctime
+    printk("Time: %s", ctime(&tm)); // man ctime
 
     gettimeofday(&ts, NULL); // man gettimeofday
-    printf("Time: %ld.%06ld secs.\n\n", (long)ts.tv_sec, (long)ts.tv_usec);
+    printk("Time: %ld.%06ld secs.\n\n", (long)ts.tv_sec, (long)ts.tv_usec);
     count--;
 }
 
@@ -72,16 +72,16 @@ void checkDisk()
     int numBlocks = (rand() % 5) + 1;
     if(rand() % 2 == 0) //Read
     {
-        char** readbuf = malloc(numBlocks*SECT_SIZE + 1);
+        char** readbuf = kmalloc(numBlocks*SECT_SIZE + 1, GFP_KERNEL);
         readDisk(logaddr,numBlocks, readbuf);
-        printf("Reading %d blocks\nRead buffer content: %s\n", numBlocks, readbuf);
-        free(readbuf);
+        printk("Reading %d blocks\nRead buffer content: %s\n", numBlocks, readbuf);
+        kfree(readbuf);
     }
     else //Write
     {
         char* writebuf = generateContent((SECT_SIZE * numBlocks));
         writeDisk(logaddr,numBlocks, writebuf);
-        printf("Writing %d blocks\nWriting content: %s\n", numBlocks, writebuf);
+        printk("Writing %d blocks\nWriting content: %s\n", numBlocks, writebuf);
     }
 
 }
